@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
-app.listen(3002);
+app.listen(80);
 
 app.post("/login", login);
 app.post("/verify-otp", verifyOTP);
