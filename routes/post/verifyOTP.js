@@ -13,7 +13,7 @@ const verifyOTP = async (req, resp) => {
 
     const {
       data: [user],
-    } = await getData("users", `mobNo = '${mobNo}'`);
+    } = await getData("_id", "users", `mobNo = '${mobNo}'`);
 
     if (!user) {
       const { data: res } = await addData(req.body, "users");
