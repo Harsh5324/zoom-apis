@@ -1,0 +1,17 @@
+const express = require("express");
+const cors = require("cors");
+
+const login = require("./routes/post/login");
+const verifyOTP = require("./routes/post/verifyOTP");
+const uploadFile = require("./routes/post/uploadFile");
+
+const app = express();
+
+app.use(express.json());
+app.use(cors({ origin: "*" }));
+
+app.listen(3002);
+
+app.post("/login", login);
+app.post("/verify-otp", verifyOTP);
+app.post("/upload-file", uploadFile);
