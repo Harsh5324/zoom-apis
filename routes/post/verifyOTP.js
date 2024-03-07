@@ -1,8 +1,9 @@
 const addData = require("../../functions/addData");
+const getData = require("../../functions/getData");
 
 const verifyOTP = async (req, resp) => {
   try {
-    const { otp } = req.body;
+    const { otp, mobNo } = req.body;
 
     const OTP = 2023;
 
@@ -10,12 +11,22 @@ const verifyOTP = async (req, resp) => {
 
     delete req.body.otp;
 
-    const { data: res } = await addData(req.body, "users");
+    const {
+      data: [user],
+    } = await getData("users", `mobNo = '${mobNo}'`);
 
-    return resp.send({
-      status: "SUCCESS",
-      data: { _id: res._id },
-    });
+    if (!user) {
+      const { data: res } = await addData(req.body, "users");
+      return resp.send({
+        status: "SUCCESS",
+        data: { _id: res._id },
+      });
+    } else {
+      return resp.send({
+        status: "SUCCESS",
+        data: { _id: user._id },
+      });
+    }
   } catch (err) {
     console.log("🚀 ~ file: verifyOTP.js:5 ~ verifyOTP ~ err:", err);
     return resp.send({ status: "FAILURE" });
