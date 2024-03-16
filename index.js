@@ -7,6 +7,7 @@ const uploadFile = require("./routes/post/uploadFile");
 const addBike = require("./routes/post/addBike");
 const bikes = require("./routes/get/bikes");
 const adminLogin = require("./routes/post/adminLogin");
+const updateAdmin = require("./routes/post/updateAdmin");
 
 const app = express();
 
@@ -23,3 +24,4 @@ app.post("/verify-otp", verifyOTP);
 app.post("/upload-file", uploadFile);
 app.post("/add-bike", addBike);
 app.post("/admin-login", adminLogin);
+app.post("/admin-updated", updateAdmin);
