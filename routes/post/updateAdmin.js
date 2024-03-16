@@ -3,7 +3,7 @@ const addData = require("../../functions/addData");
 const updateAdmin = async (req, resp) => {
   try {
     const { body } = req;
-    const res = await addData(body, "admins", `_id = 1`);
+    const res = await addData({ ...body, _id: 1 }, "admins");
     return resp.send(res);
   } catch (err) {
     console.log("🚀 ~ updateAdmin ~ err:", err);
