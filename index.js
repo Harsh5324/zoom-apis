@@ -4,14 +4,22 @@ const cors = require("cors");
 const login = require("./routes/post/login");
 const verifyOTP = require("./routes/post/verifyOTP");
 const uploadFile = require("./routes/post/uploadFile");
+const addBike = require("./routes/post/addBike");
+const bikes = require("./routes/get/bikes");
+const adminLogin = require("./routes/post/adminLogin");
 
 const app = express();
 
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
-app.listen(80);
+app.listen(3002);
+
+app.get("/", (_, resp) => resp.send("Hello from zoom server"));
+app.get("/bikes", bikes);
 
 app.post("/login", login);
 app.post("/verify-otp", verifyOTP);
 app.post("/upload-file", uploadFile);
+app.post("/add-bike", addBike);
+app.post("/admin-login", adminLogin);
