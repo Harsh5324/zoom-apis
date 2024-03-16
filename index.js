@@ -8,6 +8,7 @@ const addBike = require("./routes/post/addBike");
 const bikes = require("./routes/get/bikes");
 const adminLogin = require("./routes/post/adminLogin");
 const updateAdmin = require("./routes/post/updateAdmin");
+const bike = require("./routes/get/bike");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.listen(80);
 
 app.get("/", (_, resp) => resp.send("Hello from zoom server"));
 app.get("/bikes", bikes);
+app.get("/bike/:id", bike);
 
 app.post("/login", login);
 app.post("/verify-otp", verifyOTP);
