@@ -24,4 +24,4 @@ app.post("/verify-otp", verifyOTP);
 app.post("/upload-file", uploadFile);
 app.post("/add-bike", addBike);
 app.post("/admin-login", adminLogin);
-app.post("/admin-updated", updateAdmin);
+app.post("/admin-update", updateAdmin);
