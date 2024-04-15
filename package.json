@@ -10,6 +10,7 @@
     "express": "^4.18.3",
     "file-base64": "^1.0.0",
     "harsh-uid": "^1.4.0",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.2"
   },
   "scripts": {

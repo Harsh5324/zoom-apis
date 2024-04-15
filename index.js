@@ -9,6 +9,8 @@ const bikes = require("./routes/get/bikes");
 const adminLogin = require("./routes/post/adminLogin");
 const updateAdmin = require("./routes/post/updateAdmin");
 const bike = require("./routes/get/bike");
+const bookBike = require("./routes/post/bookBike");
+const { authenticate } = require("./functions/token");
 
 const app = express();
 
@@ -28,3 +30,4 @@ app.post("/upload-file", uploadFile);
 app.post("/add-bike", addBike);
 app.post("/admin-login", adminLogin);
 app.post("/admin-update", updateAdmin);
+app.post("/book-bike", authenticate, bookBike);

@@ -1,5 +1,6 @@
 const addData = require("../../functions/addData");
 const getData = require("../../functions/getData");
+const { generateToken } = require("../../functions/token");
 
 const verifyOTP = async (req, resp) => {
   try {
@@ -19,12 +20,12 @@ const verifyOTP = async (req, resp) => {
       const { data: res } = await addData(req.body, "users");
       return resp.send({
         status: "SUCCESS",
-        data: { _id: res._id },
+        data: { token: generateToken(res._id) },
       });
     } else {
       return resp.send({
         status: "SUCCESS",
-        data: { _id: user._id },
+        data: { token: generateToken(user._id) },
       });
     }
   } catch (err) {
