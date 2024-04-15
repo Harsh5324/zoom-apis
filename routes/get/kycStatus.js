@@ -8,7 +8,7 @@ const kycStatus = async (req, resp) => {
 
     resp.send({
       status: "SUCCESS",
-      kycStatus: aadhaarNo ? "COMPLETED" : "PENDING",
+      data: { kycStatus: aadhaarNo ? "COMPLETED" : "PENDING" },
     });
   } catch (err) {
     console.log("🚀 ~ file: kycStatus.js:5 ~ kycStatus ~ err:", err);
