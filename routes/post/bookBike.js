@@ -1,9 +1,13 @@
 const addData = require("../../functions/addData");
 const getData = require("../../functions/getData");
+const moment = require("moment");
 
 const bookBike = async (req, resp) => {
   try {
     const { body, user } = req;
+
+    body.startDate = moment(body.startDate).format("YYYY-MM-DD HH:mm:ss");
+    body.endDate = moment(body.endDate).format("YYYY-MM-DD HH:mm:ss");
 
     const {
       data: [bike],
