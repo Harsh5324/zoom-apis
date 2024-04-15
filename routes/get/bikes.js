@@ -23,7 +23,7 @@ const bikes = async (req, resp) => {
           "bookedBikes",
           `endDate <= '${startDate}' && bike = ${item._id}`
         );
-        bikes[index].quantity = data.length;
+        bikes[index].quantity = bikes[index].quantity + data.length;
       }
     });
 
