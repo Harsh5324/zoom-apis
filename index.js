@@ -11,6 +11,8 @@ const updateAdmin = require("./routes/post/updateAdmin");
 const bike = require("./routes/get/bike");
 const bookBike = require("./routes/post/bookBike");
 const { authenticate } = require("./functions/token");
+const completeKyc = require("./routes/post/completeKyc");
+const kycStatus = require("./routes/get/kycStatus");
 
 const app = express();
 
@@ -23,6 +25,7 @@ app.listen(80);
 app.get("/", (_, resp) => resp.send("Hello from zoom server"));
 app.get("/bikes", bikes);
 app.get("/bike/:id", bike);
+app.get("/kyc-status", authenticate, kycStatus);
 
 app.post("/login", login);
 app.post("/verify-otp", verifyOTP);
@@ -31,3 +34,4 @@ app.post("/add-bike", addBike);
 app.post("/admin-login", adminLogin);
 app.post("/admin-update", updateAdmin);
 app.post("/book-bike", authenticate, bookBike);
+app.post("/complete-kyc", authenticate, completeKyc);
