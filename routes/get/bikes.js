@@ -24,6 +24,10 @@ const bikes = async (req, resp) => {
             `endDate <= '${startDate}' && bike = ${bike._id}`
           );
           bikes[index].quantity = bike.quantity + data.length;
+          console.log(
+            "🚀 ~ file: bikes.js:27 ~ bikes.map ~ data.length:",
+            data.length
+          );
         })
       );
 
