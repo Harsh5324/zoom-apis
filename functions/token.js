@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const key = `ORZvS£bvlo<K'£^8HuUJsd<36J/7/;+2?[E*>6.XxV(8i9p5$u`;
 
 const generateToken = (data) => {
-  return jwt.sign(data, key, { expiresIn: "365d" });
+  return jwt.sign(data, key, { expiresIn: "365 days" });
 };
 
 const authenticate = (req, resp, next) => {
