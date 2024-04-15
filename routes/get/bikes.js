@@ -17,7 +17,7 @@ const bikes = async (req, resp) => {
     let { data: bikes } = await getData(null, "bikes");
 
     const prom = await bikes.map(async (item, index) => {
-      if (item.quantity == 0 && startDate && endDate) {
+      if (startDate && endDate) {
         const { data } = await getData(
           "_id",
           "bookedBikes",
