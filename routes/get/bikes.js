@@ -5,30 +5,35 @@ const bikes = async (req, resp) => {
   try {
     let { startDate, endDate } = req.query;
 
-    startDate =
-      startDate && moment(startDate).format("YYYY-MM-DD HH:mm:ss").toString();
-    endDate =
-      endDate && moment(endDate).format("YYYY-MM-DD HH:mm:ss").toString();
-
     let { data: bikes } = await getData(null, "bikes");
 
-    const prom = await bikes.map(async (item, index) => {
-      if (startDate && endDate) {
-        const { data } = await getData(
-          "_id",
-          "bookedBikes",
-          `endDate <= '${startDate}' && bike = ${item._id}`
-        );
-        bikes[index].quantity = bikes[index].quantity + data.length;
-      }
-    });
+    if (
+      startDate &&
+      endDate &&
+      moment(startDate, "YYYY-MM-DD", true).isValid() &&
+      moment(endDate, "YYYY-MM-DD", true).isValid()
+    ) {
+      startDate = moment(startDate).format("YYYY-MM-DD HH:mm:ss");
+      endDate = moment(endDate).format("YYYY-MM-DD HH:mm:ss");
 
-    await Promise.all(prom);
+      await Promise.all(
+        bikes.map(async (bike, index) => {
+          const { data } = await getData(
+            "_id",
+            "bookedBikes",
+            `endDate <= '${startDate}' && bike = ${bike._id}`
+          );
+          bikes[index].quantity = bike.quantity + data.length;
+        })
+      );
 
-    resp.send({ status: "SUCCESS", data: bikes });
+      resp.send({ status: "SUCCESS", data: bikes });
+    } else {
+      resp.send({ status: "SUCCESS", data: bikes });
+    }
   } catch (err) {
-    console.log("🚀 ~ bikes ~ err:", err);
-    resp.send({ status: "FAILURE" });
+    console.error("Error occurred:", err);
+    resp.status(500).send({ status: "FAILURE" });
   }
 };
 
