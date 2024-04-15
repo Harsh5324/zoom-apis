@@ -1,5 +1,6 @@
 const moment = require("moment");
 const getData = require("../../functions/getData");
+const { decode } = require("base-64");
 
 const bikes = async (req, resp) => {
   try {
