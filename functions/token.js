@@ -7,9 +7,9 @@ const generateToken = (data) => {
 };
 
 const authenticate = (req, resp, next) => {
-  const token = req.headers.authentication
-    ? req.headers.authentication.split("Bearer ")[1]
-    : "";
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
   jwt.verify(token, key, (err, decoded) => {
     if (err) {
       console.log("🚀 ~ file: token.js:12 ~ jwt.verify ~ err:", err);
