@@ -5,15 +5,6 @@ const bikes = async (req, resp) => {
   try {
     let { startDate, endDate } = req.query;
 
-    let q = null;
-
-    if (startDate && endDate) {
-      startDate = moment(startDate).format("YYYY-MM-DD HH:mm:ss");
-      endDate = moment(endDate).format("YYYY-MM-DD HH:mm:ss");
-
-      q = `endDate <= '${startDate}'`;
-    }
-
     let { data: bikes } = await getData(null, "bikes");
 
     const prom = await bikes.map(async (item, index) => {
@@ -21,7 +12,7 @@ const bikes = async (req, resp) => {
         const { data } = await getData(
           "_id",
           "bookedBikes",
-          `endDate <= '${startDate}' && bike = ${item._id}`
+          `endDate <= ${startDate} && bike = ${item._id}`
         );
         bikes[index].quantity = bikes[index].quantity + data.length;
       }
