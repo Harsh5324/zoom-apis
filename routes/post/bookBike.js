@@ -12,7 +12,7 @@ const bookBike = async (req, resp) => {
     if (bike.quantity == 0)
       return resp.send({ status: "FAILURE", msg: "Bike is not available" });
 
-    await addData({ _id: bike._id, quantity: bike.quantity - 1 });
+    await addData({ _id: bike._id, quantity: bike.quantity - 1 }, "bikes");
 
     const res = await addData({ ...body, user }, "bookedBikes");
 
