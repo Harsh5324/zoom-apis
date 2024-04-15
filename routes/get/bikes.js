@@ -19,18 +19,18 @@ const bikes = async (req, resp) => {
           const { data } = await getData(
             "_id",
             "bookedBikes",
-            `endDate <= '${startDate}' && bike = ${bike._id}`
+            `endDate <= '${startDate}' && bike = ${bike._id} && status = 0`
           );
           bikes[index].quantity = bike.quantity + data.length;
-          console.log(
-            "🚀 ~ file: bikes.js:27 ~ bikes.map ~ data.length:",
-            data.length
-          );
         })
       );
 
+      bikes = bikes.filter((i) => i.quantity > 0);
+
       resp.send({ status: "SUCCESS", data: bikes });
     } else {
+      bikes = bikes.filter((i) => i.quantity > 0);
+
       resp.send({ status: "SUCCESS", data: bikes });
     }
   } catch (err) {
