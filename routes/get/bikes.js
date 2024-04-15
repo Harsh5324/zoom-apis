@@ -12,7 +12,7 @@ const bikes = async (req, resp) => {
         const { data } = await getData(
           "_id",
           "bookedBikes",
-          `endDate <= ${startDate} && bike = ${item._id}`
+          `endDate <= '${new Date(startDate)}' && bike = ${item._id}`
         );
         bikes[index].quantity = bikes[index].quantity + data.length;
       }
