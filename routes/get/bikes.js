@@ -5,10 +5,8 @@ const bikes = async (req, resp) => {
   try {
     let { startDate, endDate } = req.query;
 
-    if (startDate && endDate) {
-      startDate = moment(startDate).format("YYYY-MM-DD HH:mm:ss");
-      endDate = moment(endDate).format("YYYY-MM-DD HH:mm:ss");
-    }
+    startDate = startDate && moment(startDate).format("YYYY-MM-DD HH:mm:ss");
+    endDate = endDate && moment(endDate).format("YYYY-MM-DD HH:mm:ss");
 
     let { data: bikes } = await getData(null, "bikes");
 
