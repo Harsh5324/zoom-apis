@@ -20,12 +20,12 @@ const verifyOTP = async (req, resp) => {
       const { data: res } = await addData(req.body, "users");
       return resp.send({
         status: "SUCCESS",
-        data: { token: generateToken(res._id) },
+        data: { token: generateToken({ _id: res._id }) },
       });
     } else {
       return resp.send({
         status: "SUCCESS",
-        data: { token: generateToken(user._id) },
+        data: { token: generateToken({ _id: user._id }) },
       });
     }
   } catch (err) {
