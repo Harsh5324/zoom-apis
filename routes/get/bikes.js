@@ -4,16 +4,12 @@ const getData = require("../../functions/getData");
 const bikes = async (req, resp) => {
   try {
     let { startDate, endDate } = req.query;
-    console.log("🚀 ~ file: bikes.js:7 ~ bikes ~ startDate:", startDate);
 
     let { data: bikes } = await getData(null, "bikes");
 
-    if (
-      startDate &&
-      endDate &&
-      moment(startDate, "YYYY-MM-DD", true).isValid() &&
-      moment(endDate, "YYYY-MM-DD", true).isValid()
-    ) {
+    if (startDate && endDate) {
+      startDate = decode(startDate);
+      endDate = decode(endDate);
       startDate = moment(startDate).format("YYYY-MM-DD HH:mm:ss");
       endDate = moment(endDate).format("YYYY-MM-DD HH:mm:ss");
 
